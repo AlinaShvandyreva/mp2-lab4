@@ -1,4 +1,4 @@
-#ifndef __TCluster_H__
+п»ї#ifndef __TCluster_H__
 #define __TCluster_H__
 #include <string>
 #include "TQueue.h"
@@ -8,21 +8,21 @@ using namespace std;
 class TCluster
 {
 private:
-	int Processors;//количестов микропроцессоров
-	int* MasBusyProcessors;//массив занятости процессоров			
-	int NumberFreeProcessors;//количество свободных процессоров	
-	double Intensity;//порог появления заданий
+	int Processors;//РєРѕР»РёС‡РµСЃС‚РѕРІ РјРёРєСЂРѕРїСЂРѕС†РµСЃСЃРѕСЂРѕРІ
+	int* MasBusyProcessors;//РјР°СЃСЃРёРІ Р·Р°РЅСЏС‚РѕСЃС‚Рё РїСЂРѕС†РµСЃСЃРѕСЂРѕРІ			
+	int NumberFreeProcessors;//РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРІРѕР±РѕРґРЅС‹С… РїСЂРѕС†РµСЃСЃРѕСЂРѕРІ	
+	double Intensity;//РїРѕСЂРѕРі РїРѕСЏРІР»РµРЅРёСЏ Р·Р°РґР°РЅРёР№
 
-	int NumberTasks;//количество задач	
-	int NumberSleepingTactsOFCluster; //число тактов простоя кластера
-	int NumberCompletedTasks;//количество выполненных задач
-	int NumberNotCompletedTask;//количество не выполненных задач
-	int NumberImpossibleTask;//Количество задач, которые нельзя выполнить		
-	int BusyProcessorsOnTacts;//количество занятых процессоров на конкретном такте
-	int Tacts;//такты	
+	int NumberTasks;//РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡	
+	int NumberSleepingTactsOFCluster; //С‡РёСЃР»Рѕ С‚Р°РєС‚РѕРІ РїСЂРѕСЃС‚РѕСЏ РєР»Р°СЃС‚РµСЂР°
+	int NumberCompletedTasks;//РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡
+	int NumberNotCompletedTask;//РєРѕР»РёС‡РµСЃС‚РІРѕ РЅРµ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡
+	int NumberImpossibleTask;//РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡, РєРѕС‚РѕСЂС‹Рµ РЅРµР»СЊР·СЏ РІС‹РїРѕР»РЅРёС‚СЊ		
+	int BusyProcessorsOnTacts;//РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РЅСЏС‚С‹С… РїСЂРѕС†РµСЃСЃРѕСЂРѕРІ РЅР° РєРѕРЅРєСЂРµС‚РЅРѕРј С‚Р°РєС‚Рµ
+	int Tacts;//С‚Р°РєС‚С‹	
 public:
 
-	//Конструктор
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	TCluster()
 	{
 		Processors = 0;
@@ -47,10 +47,10 @@ public:
 			Processors = _Processors;
 			Tacts = _Tacts;
 			Intensity = _Intensity;
-			NumberFreeProcessors = Processors; //в начале работы все свободны
-			MasBusyProcessors = new int[Processors]; //выделение памяти в массиве занятости
+			NumberFreeProcessors = Processors; //РІ РЅР°С‡Р°Р»Рµ СЂР°Р±РѕС‚С‹ РІСЃРµ СЃРІРѕР±РѕРґРЅС‹
+			MasBusyProcessors = new int[Processors]; //РІС‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё РІ РјР°СЃСЃРёРІРµ Р·Р°РЅСЏС‚РѕСЃС‚Рё
 			for (int i = 0; i < Processors; i++)
-				MasBusyProcessors[i] = 0; //в начале работы все свободны
+				MasBusyProcessors[i] = 0; //РІ РЅР°С‡Р°Р»Рµ СЂР°Р±РѕС‚С‹ РІСЃРµ СЃРІРѕР±РѕРґРЅС‹
 			NumberTasks = 0;
 			NumberCompletedTasks = 0;
 			NumberNotCompletedTask = 0;
@@ -60,17 +60,17 @@ public:
 			//Intensity = 1;
 		}
 	}
-	//Деструктор
+	//Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
 	~TCluster()
 	{
-		if (MasBusyProcessors != nullptr)//если массив был не пуст
+		if (MasBusyProcessors != nullptr)//РµСЃР»Рё РјР°СЃСЃРёРІ Р±С‹Р» РЅРµ РїСѓСЃС‚
 			delete[]  MasBusyProcessors;
 	}
-	//Подготовительные действия перед запуском кластера
+	//РџРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅС‹Рµ РґРµР№СЃС‚РІРёСЏ РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј РєР»Р°СЃС‚РµСЂР°
 	void PreparationForWork(int _SizeQ);
-	//Работа кластера
+	//Р Р°Р±РѕС‚Р° РєР»Р°СЃС‚РµСЂР°
 	void Work(TQueue<TTask>& _queue);
-	//Возврат статистики
+	//Р’РѕР·РІСЂР°С‚ СЃС‚Р°С‚РёСЃС‚РёРєРё
 	void GetStatistics();
 	bool EmptyOFCluster();
 };

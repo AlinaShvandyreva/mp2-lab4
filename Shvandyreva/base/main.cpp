@@ -1,4 +1,4 @@
-#include "TCluster.h"
+ï»¿#include "TCluster.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -10,13 +10,13 @@ int main()
 	int SizeQueue;
 	int Tacts;
 	double Intensity;
-	cout << "Ââåäèòå ÷èñëî ïðîöåññåðîâ: " << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐµÑ€Ð¾Ð²: " << endl;
 	cin >> NumberProcessors;
-	cout << "Ââåäèòå ðàçìåð î÷åðåäè: " << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸: " << endl;
 	cin >> SizeQueue;
-	cout << "Ââåäèòå ÷èñëî òàêòîâ: " << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾ Ñ‚Ð°ÐºÑ‚Ð¾Ð²: " << endl;
 	cin >> Tacts;
-	cout << "Ââåäèòå ïîðîã ïîÿâëåíèÿ çàäàíèé: " << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð¾Ñ€Ð¾Ð³ Ð¿Ð¾ÑÐ²Ð»ÐµÐ½Ð¸Ñ Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹: " << endl;
 	cin >> Intensity;
 	cout << endl;
 	TCluster Cluster(NumberProcessors, Tacts, Intensity);

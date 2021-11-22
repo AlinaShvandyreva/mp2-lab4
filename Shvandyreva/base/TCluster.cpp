@@ -1,20 +1,20 @@
-#include "TCluster.h"
+п»ї#include "TCluster.h"
 #include <iostream>
 #include <ctime>
 #include <string>
 #include <stdlib.h>
 #include <time.h>
 using namespace std;
-//Подготовка кластера к работе
+//РџРѕРґРіРѕС‚РѕРІРєР° РєР»Р°СЃС‚РµСЂР° Рє СЂР°Р±РѕС‚Рµ
 void TCluster::PreparationForWork(int _SizeQ)
 {
 	if ((_SizeQ > MAX_QUEUE_SIZE) || (_SizeQ < MIN_QUEUE_SIZE))
 		throw exception();
 	else 
 	{
-		//создание очереди необходимого размера
+		//СЃРѕР·РґР°РЅРёРµ РѕС‡РµСЂРµРґРё РЅРµРѕР±С…РѕРґРёРјРѕРіРѕ СЂР°Р·РјРµСЂР°
 		TQueue<TTask> WorkQ(_SizeQ);
-		//Запуск работы кластера
+		//Р—Р°РїСѓСЃРє СЂР°Р±РѕС‚С‹ РєР»Р°СЃС‚РµСЂР°
 		Work(WorkQ);
 	}
 }
@@ -28,7 +28,7 @@ bool TCluster::EmptyOFCluster()
 		return true;
 	return false;
 }
-//Работа кластера
+//Р Р°Р±РѕС‚Р° РєР»Р°СЃС‚РµСЂР°
 void TCluster::Work(TQueue<TTask>& _Queue)
 {
 	srand(time(NULL));
@@ -37,63 +37,63 @@ void TCluster::Work(TQueue<TTask>& _Queue)
 		double Chance = ((double)rand() / (RAND_MAX));
 		if (Chance < Intensity)
 		{
-			TTask Task(Processors, Tacts); //Создали задачу
+			TTask Task(Processors, Tacts); //РЎРѕР·РґР°Р»Рё Р·Р°РґР°С‡Сѓ
 			NumberTasks++;
 			if (_Queue.Full() == true)
-				NumberImpossibleTask++; //задачу невозможно выполнить (нет процессоров или некуда положить на ожидание)
+				NumberImpossibleTask++; //Р·Р°РґР°С‡Сѓ РЅРµРІРѕР·РјРѕР¶РЅРѕ РІС‹РїРѕР»РЅРёС‚СЊ (РЅРµС‚ РїСЂРѕС†РµСЃСЃРѕСЂРѕРІ РёР»Рё РЅРµРєСѓРґР° РїРѕР»РѕР¶РёС‚СЊ РЅР° РѕР¶РёРґР°РЅРёРµ)
 			else
-				_Queue.AddElQueue(Task); //добавили задачу в очередь
+				_Queue.AddElQueue(Task); //РґРѕР±Р°РІРёР»Рё Р·Р°РґР°С‡Сѓ РІ РѕС‡РµСЂРµРґСЊ
 		}
-		//если есть, что взять из очереди
+		//РµСЃР»Рё РµСЃС‚СЊ, С‡С‚Рѕ РІР·СЏС‚СЊ РёР· РѕС‡РµСЂРµРґРё
 		if (_Queue.Empty() == false)
 		{
 			int TempProcessors;
 			int TempTact;
-			TempProcessors = _Queue.GetTop().GetNumberProcessors(); //количество процессоров нужных для выполнения задания
-			TempTact = _Queue.GetTop().GetNumberTacts();//количсетво тактов нужных для выполнения
-			int TempBusyProcessors = TempProcessors; //количество процессов которые ЕЩЁ нужны для выполнения задачи
-			//если хватит места для выполнения задачи
+			TempProcessors = _Queue.GetTop().GetNumberProcessors(); //РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕС†РµСЃСЃРѕСЂРѕРІ РЅСѓР¶РЅС‹С… РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°РЅРёСЏ
+			TempTact = _Queue.GetTop().GetNumberTacts();//РєРѕР»РёС‡СЃРµС‚РІРѕ С‚Р°РєС‚РѕРІ РЅСѓР¶РЅС‹С… РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ
+			int TempBusyProcessors = TempProcessors; //РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕС†РµСЃСЃРѕРІ РєРѕС‚РѕСЂС‹Рµ Р•Р©РЃ РЅСѓР¶РЅС‹ РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё
+			//РµСЃР»Рё С…РІР°С‚РёС‚ РјРµСЃС‚Р° РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё
 			if (NumberFreeProcessors >= TempBusyProcessors)
 			{
 				for (int i = 0; i < Processors; i++)
 				{
-					if ((MasBusyProcessors[i] == 0) && (TempBusyProcessors > 0)) //Процессор не занят и еще нужны процессоры задаче
+					if ((MasBusyProcessors[i] == 0) && (TempBusyProcessors > 0)) //РџСЂРѕС†РµСЃСЃРѕСЂ РЅРµ Р·Р°РЅСЏС‚ Рё РµС‰Рµ РЅСѓР¶РЅС‹ РїСЂРѕС†РµСЃСЃРѕСЂС‹ Р·Р°РґР°С‡Рµ
 					{
-						MasBusyProcessors[i] = TempTact; //занимаем процессор
-						TempBusyProcessors--; //необходимые минус 1
+						MasBusyProcessors[i] = TempTact; //Р·Р°РЅРёРјР°РµРј РїСЂРѕС†РµСЃСЃРѕСЂ
+						TempBusyProcessors--; //РЅРµРѕР±С…РѕРґРёРјС‹Рµ РјРёРЅСѓСЃ 1
 					}
 					if (TempBusyProcessors == 0)
 						break;
 				}
-				NumberFreeProcessors = NumberFreeProcessors - TempProcessors; //пересчет свободных согласно только что занятым
-				_Queue.TakeElQueue().GetNumberProcessors(); //задача поставлена на выполнение - забираем из очереди
+				NumberFreeProcessors = NumberFreeProcessors - TempProcessors; //РїРµСЂРµСЃС‡РµС‚ СЃРІРѕР±РѕРґРЅС‹С… СЃРѕРіР»Р°СЃРЅРѕ С‚РѕР»СЊРєРѕ С‡С‚Рѕ Р·Р°РЅСЏС‚С‹Рј
+				_Queue.TakeElQueue().GetNumberProcessors(); //Р·Р°РґР°С‡Р° РїРѕСЃС‚Р°РІР»РµРЅР° РЅР° РІС‹РїРѕР»РЅРµРЅРёРµ - Р·Р°Р±РёСЂР°РµРј РёР· РѕС‡РµСЂРµРґРё
 			}
 		}
 		if (EmptyOFCluster() == true)
 			NumberSleepingTactsOFCluster++;
-		//проход по микропроцессорам
+		//РїСЂРѕС…РѕРґ РїРѕ РјРёРєСЂРѕРїСЂРѕС†РµСЃСЃРѕСЂР°Рј
 		for (int i = 0; i < Processors; i++)
 		{
-			if (MasBusyProcessors[i] > 0) //если процессор занят
+			if (MasBusyProcessors[i] > 0) //РµСЃР»Рё РїСЂРѕС†РµСЃСЃРѕСЂ Р·Р°РЅСЏС‚
 			{
-				MasBusyProcessors[i]--; //уменьшаем количество оставшихся тактов
-				if (MasBusyProcessors[i] == 0) //если процессор освободился
-					NumberFreeProcessors++; //+1 свободный процессор
+				MasBusyProcessors[i]--; //СѓРјРµРЅСЊС€Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РѕСЃС‚Р°РІС€РёС…СЃСЏ С‚Р°РєС‚РѕРІ
+				if (MasBusyProcessors[i] == 0) //РµСЃР»Рё РїСЂРѕС†РµСЃСЃРѕСЂ РѕСЃРІРѕР±РѕРґРёР»СЃСЏ
+					NumberFreeProcessors++; //+1 СЃРІРѕР±РѕРґРЅС‹Р№ РїСЂРѕС†РµСЃСЃРѕСЂ
 			}
 		}
-		BusyProcessorsOnTacts = BusyProcessorsOnTacts + (Processors - NumberFreeProcessors);//число занятых процессоров на такте
+		BusyProcessorsOnTacts = BusyProcessorsOnTacts + (Processors - NumberFreeProcessors);//С‡РёСЃР»Рѕ Р·Р°РЅСЏС‚С‹С… РїСЂРѕС†РµСЃСЃРѕСЂРѕРІ РЅР° С‚Р°РєС‚Рµ
 	}
-	NumberNotCompletedTask = _Queue.BusyElSize();//сколько задач осталось в очереди
+	NumberNotCompletedTask = _Queue.BusyElSize();//СЃРєРѕР»СЊРєРѕ Р·Р°РґР°С‡ РѕСЃС‚Р°Р»РѕСЃСЊ РІ РѕС‡РµСЂРµРґРё
 }
-//Вывод сбора статистики из работы кластера
+//Р’С‹РІРѕРґ СЃР±РѕСЂР° СЃС‚Р°С‚РёСЃС‚РёРєРё РёР· СЂР°Р±РѕС‚С‹ РєР»Р°СЃС‚РµСЂР°
 void TCluster::GetStatistics()
 {
 	NumberCompletedTasks = NumberTasks - (NumberNotCompletedTask + NumberImpossibleTask);
-	cout << "Число, созданных задач: " << NumberTasks << endl;
-	cout << "Число, успешно выполненных задач: " << NumberCompletedTasks << endl;
-	cout << "Число задач, оставшихся в очереди: " << NumberNotCompletedTask << endl;
-	cout << "Число выполняющихся задач: " << NumberTasks- NumberCompletedTasks-NumberNotCompletedTask- NumberImpossibleTask << endl;
-	cout << "Число невозможных для выполнения задач: " << NumberImpossibleTask << endl;
-	cout << "Средняя загруженность процессоров: " << BusyProcessorsOnTacts / Tacts << " из " << Processors << endl;
-	cout << "Число тактов простоя кластера: "<< NumberSleepingTactsOFCluster << endl;
+	cout << "Р§РёСЃР»Рѕ, СЃРѕР·РґР°РЅРЅС‹С… Р·Р°РґР°С‡: " << NumberTasks << endl;
+	cout << "Р§РёСЃР»Рѕ, СѓСЃРїРµС€РЅРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡: " << NumberCompletedTasks << endl;
+	cout << "Р§РёСЃР»Рѕ Р·Р°РґР°С‡, РѕСЃС‚Р°РІС€РёС…СЃСЏ РІ РѕС‡РµСЂРµРґРё: " << NumberNotCompletedTask << endl;
+	cout << "Р§РёСЃР»Рѕ РІС‹РїРѕР»РЅСЏСЋС‰РёС…СЃСЏ Р·Р°РґР°С‡: " << NumberTasks- NumberCompletedTasks-NumberNotCompletedTask- NumberImpossibleTask << endl;
+	cout << "Р§РёСЃР»Рѕ РЅРµРІРѕР·РјРѕР¶РЅС‹С… РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡: " << NumberImpossibleTask << endl;
+	cout << "РЎСЂРµРґРЅСЏСЏ Р·Р°РіСЂСѓР¶РµРЅРЅРѕСЃС‚СЊ РїСЂРѕС†РµСЃСЃРѕСЂРѕРІ: " << BusyProcessorsOnTacts / Tacts << " РёР· " << Processors << endl;
+	cout << "Р§РёСЃР»Рѕ С‚Р°РєС‚РѕРІ РїСЂРѕСЃС‚РѕСЏ РєР»Р°СЃС‚РµСЂР°: "<< NumberSleepingTactsOFCluster << endl;
 }

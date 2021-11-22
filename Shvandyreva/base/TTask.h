@@ -1,4 +1,4 @@
-#ifndef __TTask_H__
+﻿#ifndef __TTask_H__
 #define __TTask_H__
 #include <ctime>
 #include <cstdlib>

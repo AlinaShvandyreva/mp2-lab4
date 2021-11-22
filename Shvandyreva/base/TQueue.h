@@ -1,4 +1,4 @@
-#ifndef __TQueue_H__
+﻿#ifndef __TQueue_H__
 #define __TQueue_H__
 #include <iostream>
 const int MAX_QUEUE_SIZE = 50;
