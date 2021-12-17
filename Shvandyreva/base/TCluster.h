@@ -34,7 +34,7 @@ public:
 		NumberSleepingTactsOFCluster = 0;
 		NumberImpossibleTask = 0;
 		BusyProcessorsOnTacts = 0;
-		//Intensity=1;
+		////Intensity=1;
 		MasBusyProcessors = new int[10];
 	}
 	TCluster(int _Processors, int _Tacts, double _Intensity)

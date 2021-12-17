@@ -3,7 +3,7 @@
 
 TEST(TTask, can_create_task)
 {
-	ASSERT_NO_THROW(TTask task);
+	ASSERT_NO_THROW(TTask task); 
 }
 TEST(TTask, can_create_task_with_values)
 {
